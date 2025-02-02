@@ -9,7 +9,21 @@ Seatify is a web-based platform built using Django and Python that allows teache
 - Branch and semester selection
 - Random seating arrangement generation
 - Export seating arrangement as PDF
+## Tech Stack
+### Frontend:
+- HTML, CSS, and JavaScript (with Bootstrap for styling)
+- Dynamic rendering with Django templates
+- Interactive particle effect using JavaScript Canvas for the registration page
 
+### Backend:
+- Django: Python-based web framework
+- Database: PostgreSQL or SQLite (depending on the setup)
+- Authentication: Django’s built-in authentication system (for user management)
+
+### Additional Libraries:
+- Bootstrap: Frontend CSS framework for responsive design
+- Bootstrap Icons: For adding icons to UI components.
+- ReportLab: For generating dynamic PDFs (like seating arrangement reports)
 ## Try it out yourself
 
 1. Clone the repository:
@@ -19,7 +33,7 @@ Seatify is a web-based platform built using Django and Python that allows teache
 
 2. Install the required Python packages:
     ```sh
-    pip install -r requirements.txt\
+    pip install -r requirements.txt
    ```   
 
 3. Run the server:
@@ -30,7 +44,7 @@ Seatify is a web-based platform built using Django and Python that allows teache
 ## Developers
 This project was developed by the following team members:
 
-1.Dhanush P B
-2.Johaan Saji
-3.Joseph Manoj
-4.Tessa Chery
+1. Dhanush P B
+2. Johaan Saji
+3. Joseph Manoj
+4. Tessa Chery

@@ -1,4 +1,4 @@
-FROM python:3.12.0-slim-buster
+FROM python:3.12.8-slim-bookworm
 
 # Set the working directory in the container
 
