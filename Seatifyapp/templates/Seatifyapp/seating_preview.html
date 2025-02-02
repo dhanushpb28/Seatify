@@ -1,0 +1,141 @@
+{% extends 'Seatifyapp/base.html' %}
+
+{% block content %}
+<h2>Seating Arrangement Preview</h2>
+<p><strong>Branch:</strong> {{ arrangement.branch.name }}</p>
+<p><strong>Semester:</strong> {{ arrangement.semester.name }}</p>
+<p><strong>Dates:</strong> {{ arrangement.start_date }} to {{ arrangement.end_date }}</p>
+
+<div class="classroom-container">
+    <!-- Blackboard at the front of the classroom -->
+    <div class="blackboard">
+        Blackboard
+    </div>
+
+    <h1>Seating Arrangement Preview</h1>
+
+    <!-- Grid container with dynamic columns -->
+    <div class="grid-container">
+        {% for row in seating %}
+            <div class="classroom-row">
+                {% for bench in row %}
+                    <div class="grid-item">
+                        <div class="desk-number">Desk {{ bench.2 }}</div> <!-- Display desk number -->
+                        <div class="seat">
+                            {% if bench.0 %}
+                                {{ bench.0 }}{% if bench.1 %}, {{ bench.1 }}{% endif %}
+                            {% else %}
+                                Empty Seat
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+
+    <a href="{% url 'download_pdf' arrangement.id %}" class="btn">Download PDF</a>
+</div>
+
+{% block styles %}
+<style>
+    /* General page styling */
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Classroom container for centralizing */
+    .classroom-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 30px;
+    }
+
+    /* Blackboard styling */
+    .blackboard {
+        width: 80%;
+        height: 80px;
+        background-color: #333;
+        color: white;
+        text-align: center;
+        line-height: 80px;
+        font-size: 24px;
+        font-weight: bold;
+        border-radius: 5px;
+        margin-bottom: 30px;  /* Space between blackboard and desks */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Seating grid for classroom arrangement */
+    .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Ensures it adapts properly */
+    gap: 20px;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    justify-items: center;
+}
+
+
+    /* Styling for each desk (seat) */
+    .grid-item {
+        width: 100px;
+        height: 100px;
+        background-color: #f0f0f0;
+        border: 2px solid #bbb;
+        border-radius: 5px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+        font-weight: bold;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Styling for a classroom-like seat */
+    .seat {
+        padding: 5px;
+        background-color: #c1e1c1;
+        border-radius: 5px;
+        font-size: 14px;
+        border: 1px solid #aaa;
+    }
+
+    /* Error message styling */
+    .error {
+        color: red;
+        margin-top: 10px;
+    }
+
+    h1 {
+        font-size: 28px;
+        margin-top: 40px;
+    }
+
+    h2 {
+        margin-top: 20px;
+    }
+
+    /* Download button styling */
+    .btn {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    .btn:hover {
+        background-color: #0056b3;
+    }
+</style>
+{% endblock %}
+{% endblock %}

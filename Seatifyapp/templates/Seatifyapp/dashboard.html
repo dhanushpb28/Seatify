@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seatify Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        .dashboard-card {
+            height: 100%;
+            transition: transform 0.2s;
+        }
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+        }
+        .card-header {
+            border-bottom: 2px solid rgba(0,0,0,0.125);
+        }
+        .list-group-item {
+            border-left: none;
+            border-right: none;
+        }
+        .btn-action {
+            min-width: 100px;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <!-- Header -->
+        <div class="text-center mb-5">
+            <h1 class="display-4 fw-bold">Welcome to Seatify Dashboard</h1>
+            <form action="{% url 'logout' %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+            
+
+            <p class="lead text-muted">Manage your seating arrangements efficiently</p>
+        </div>
+
+        <!-- Management Cards -->
+        <div class="row g-4 mb-5">
+            <!-- Branches Card -->
+            <div class="col-md-6">
+                <div class="card dashboard-card shadow-sm">
+                    <div class="card-header bg-primary bg-gradient text-white py-3">
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-diagram-2-fill fs-4 me-2"></i>
+                            <h3 class="mb-0 fs-4">Manage Branches</h3>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group list-group-flush">
+                            {% for branch in branches %}
+                            <div class="list-group-item d-flex justify-content-between align-items-center py-3">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-building text-primary me-2"></i>
+                                    <span>{{ branch.name }}</span>
+                                </div>
+                                <a href="{% url 'delete_branch' branch.id %}" class="btn btn-outline-danger btn-sm btn-action">
+                                    <i class="bi bi-trash-fill me-1"></i> Delete
+                                </a>
+                            </div>
+                            {% empty %}
+                            <div class="text-center py-4 text-muted">
+                                <i class="bi bi-emoji-frown fs-4"></i>
+                                <p class="mt-2">No branches available</p>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="text-center mt-4">
+                            <a href="{% url 'add_branch' %}" class="btn btn-primary btn-lg">
+                                <i class="bi bi-plus-circle-fill me-2"></i>Add New Branch
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Semesters Card -->
+            <div class="col-md-6">
+                <div class="card dashboard-card shadow-sm">
+                    <div class="card-header bg-success bg-gradient text-white py-3">
+                        <div class="d-flex align-items-center">
+                            <i class="bi bi-calendar3 fs-4 me-2"></i>
+                            <h3 class="mb-0 fs-4">Manage Semesters</h3>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group list-group-flush">
+                            {% for semester in semesters %}
+                            <div class="list-group-item d-flex justify-content-between align-items-center py-3">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-book text-success me-2"></i>
+                                    <span>{{ semester.name }}</span>
+                                </div>
+                                <a href="{% url 'delete_semester' semester.id %}" class="btn btn-outline-danger btn-sm btn-action">
+                                    <i class="bi bi-trash-fill me-1"></i> Delete
+                                </a>
+                            </div>
+                            {% empty %}
+                            <div class="text-center py-4 text-muted">
+                                <i class="bi bi-emoji-frown fs-4"></i>
+                                <p class="mt-2">No semesters available</p>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="text-center mt-4">
+                            <a href="{% url 'add_semester' %}" class="btn btn-success btn-lg">
+                                <i class="bi bi-plus-circle-fill me-2"></i>Add New Semester
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Create Seating Arrangement -->
+        <div class="card shadow-sm">
+            <div class="card-body text-center py-4">
+                <h4 class="mb-3 text-muted">Ready to create a new seating arrangement?</h4>
+                <a href="{% url 'create_seating' %}" class="btn btn-primary btn-lg px-5">
+                    <i class="bi bi-layout-text-window-reverse me-2"></i>
+                    Create New Seating Arrangement
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

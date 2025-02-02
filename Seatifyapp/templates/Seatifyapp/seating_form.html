@@ -1,0 +1,43 @@
+{% extends 'Seatifyapp/base.html' %}
+
+{% block title %}Create Seating Arrangement{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold">Create Seating Arrangement</h1>
+        <p class="lead text-muted">Fill out the form to generate a new seating arrangement</p>
+        <p class="lead text-muted">If there are no absentees, please enter '0' in the absentee column.</p>
+
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-6 mx-auto">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary bg-gradient text-white py-3">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-layout-text-window-reverse fs-4 me-2"></i>
+                        <h3 class="mb-0 fs-4">Seating Arrangement Details</h3>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-lg px-5">
+                                <i class="bi bi-check-circle-fill me-2"></i> Generate Arrangement
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary btn-lg">
+                    <i class="bi bi-arrow-left me-2"></i> Back to Dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
