@@ -48,8 +48,10 @@ INSTALLED_APPS = [
     'crispy_forms',
     'Seatifyapp',
 ]
+
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'Seatifyapp/static']
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # Add this line
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'  # Redirect after successful login
 LOGOUT_REDIRECT_URL = 'login'  # Redirect after logout
@@ -130,7 +132,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+# STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
