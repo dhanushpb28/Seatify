@@ -17,12 +17,12 @@ Seatify is a web-based platform built using Django and Python that allows teache
     git clone https://github.com/Cloud-Tech-Team/seatify.git
    '''   
 
-3. Install the required Python packages:
+2. Install the required Python packages:
     '''sh
     pip install -r requirements.txt\
    '''    
 
-5. Run the server:
+3. Run the server:
     '''sh
     python manage.py runserver
    '''
