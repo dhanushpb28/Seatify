@@ -137,13 +137,31 @@
                 <p class="password-instructions">
                     * Password must be at least 8 characters long.<br>
                     * Must include a mix of letters and numbers.<br>
-                    * Cannot be a commonly used password.
+                    * Cannot be a commonly used password.<br>
+                    *Your password can't be similar to your personal Information.
                 </p>
+                {% if form.password1.errors %}
+                    <div class="error-message">
+                        {% for error in form.password1.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
+            
             <div class="form-group">
                 <label for="{{ form.password2.id_for_label }}">Confirm Password</label>
                 {{ form.password2 }}
+                {% if form.password2.errors %}
+                    <div class="error-message">
+                        {% for error in form.password2.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
             </div>
+            
+            
             <button type="submit" class="btn-submit">Register</button>
         </form>
         

@@ -79,8 +79,11 @@ def register(request):
             form.save()
             messages.success(request, 'Registration successful! You can now log in.')
             return redirect('login')
+        else:
+            messages.error(request, "There was an error in your form. Please fix it.")
     else:
         form = CustomUserCreationForm()
+
     return render(request, 'Seatifyapp/register.html', {'form': form})
 @login_required
 def dashboard(request):
