@@ -10,7 +10,24 @@ Seatify is a web-based platform built using Django and Python that allows teache
 - Random seating arrangement generation
 - Export seating arrangement as PDF
 
-#Developers
+## Try it out yourself
+
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/Cloud-Tech-Team/seatify.git
+   ``` 
+
+2. Install the required Python packages:
+    ```sh
+    pip install -r requirements.txt\
+   ```   
+
+3. Run the server:
+    ```sh
+    python manage.py runserver
+   ```
+
+## Developers
 This project was developed by the following team members:
 
 1.Dhanush P B
