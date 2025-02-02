@@ -28,6 +28,7 @@ load_dotenv()
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
+SQLITE_URL = os .environ.get('SQLITE_URL')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -48,8 +49,10 @@ INSTALLED_APPS = [
     'crispy_forms',
     'Seatifyapp',
 ]
+
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'Seatifyapp/static']
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # Add this line
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'  # Redirect after successful login
 LOGOUT_REDIRECT_URL = 'login'  # Redirect after logout
@@ -91,7 +94,7 @@ WSGI_APPLICATION = 'Seatify.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'db/db.sqlite3',
     }
 }
 
@@ -130,7 +133,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+# STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
