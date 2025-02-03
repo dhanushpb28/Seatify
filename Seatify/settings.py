@@ -92,8 +92,8 @@ WSGI_APPLICATION = 'Seatify.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db/db.sqlite3',
+        "ENGINE": "libsql.db.backends.sqlite3",
+        "NAME": "libsql://group1-mits-cloud-tech-team.turso.io?authToken=" + os.environ.get('DBAUTHTOKEN')
     }
 }
 
