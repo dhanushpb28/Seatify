@@ -1,22 +1,33 @@
-FROM python:3.12.8-slim-bookworm
+# Use official Python 3.13 slim image
+FROM python:3.13-slim
 
-# Set the working directory in the container
+# Set working directory
 WORKDIR /app
 
-# Copy the dependencies file to the working directory
+# Install system dependencies
+RUN apt-get update && \
+    apt-get install -y nginx
+
+# Copy configuration files
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Install Python dependencies
 COPY requirements.txt .
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
 
-# Install any dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy the content of the local repository to the working directory
+# Copy application code
 COPY . .
 
-RUN python manage.py migrate
-RUN python manage.py collectstatic
+# Collect static files
+RUN python manage.py collectstatic --noinput
 
-# Specify the port number the container should expose
-EXPOSE 8000
+# Expose HTTP port
+EXPOSE 80
 
-# Run Gunicorn to serve the application using the WSGI application defined in [Seatify/wsgi.py](Seatify/wsgi.py)
-CMD ["gunicorn", "Seatify.wsgi:application", "--bind", "0.0.0.0:8000"]
+# Start both services
+CMD nginx -g "daemon off;" & \
+    gunicorn Seatify.wsgi:application \
+    --bind 0.0.0.0:8000 \
+    --workers 3 \
+    --timeout 120
